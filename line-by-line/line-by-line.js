@@ -1,4 +1,5 @@
 const { Readable } = require('stream');
+const { EOL } = require('os');
 
 class LineByLine extends Readable {
   constructor(stream, options = {}) {
@@ -8,6 +9,7 @@ class LineByLine extends Readable {
     this._lines = [];
     this._stream.setEncoding(this._encoding);
 		this._ready = false;
+    this.firstLine = true;
     this._stream.on('readable', () => {
 			this._ready = true;
 			console.log('within readable');
@@ -24,7 +26,11 @@ class LineByLine extends Readable {
       hasLineSegment = false;
     }
     while(this._lines.length > (hasLineSegment ? 1 : 0)) {
-      const line = this._lines.shift();
+      let line = `${EOL}${this._lines.shift()}`;
+      if (this.firstLine) {
+        line = line.replace(EOL, '');
+        this.firstLine = false;
+      }
       if (this.push(line)) {
         this.emit('line', line);
       } else {
