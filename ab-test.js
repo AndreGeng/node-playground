@@ -9,6 +9,7 @@ http.createServer((req, res) => {
   // res.end(content);
   // console.log('call end ', process.hrtime(time));
   console.log('call in ');
+  console.log('process id:', process.env.pm_id);
   const time = process.hrtime();
   fs.createReadStream(path.resolve(__dirname, './mock/test.txt')).pipe(res);
   console.log('call end ', process.hrtime(time));
