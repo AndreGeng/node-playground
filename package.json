@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/AndreGeng/node-playground/issues"
   },
-  "homepage": "https://github.com/AndreGeng/node-playground#readme"
+  "homepage": "https://github.com/AndreGeng/node-playground#readme",
+  "devDependencies": {
+    "heapdump": "^0.3.9"
+  }
 }
